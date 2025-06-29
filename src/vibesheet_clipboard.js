@@ -3,13 +3,7 @@
 
 
 
-
-
-
 // ===== clipboardManager.js contents =====
-
-
-
 const clipboardManager = (() => {
   const clipboardItems = [];
   const MAX_CLIPBOARD_ITEMS = 50; // Limit to the last N items
@@ -79,23 +73,7 @@ const clipboardManager = (() => {
 clipboardManager.init();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // ===== clipboardNotificationManager.js contents =====
-
-
-
-
 import { v4 as uuidv4 } from 'uuid'; // Assuming UUID library is available
 
 class ClipboardNotificationManager {
@@ -161,21 +139,7 @@ export default clipboardNotificationManager;
 
 
 
-
-
-
-
-
-
-
-
-
-
 // ===== teamManagementHandler.js contents =====
-
-
-
-
 const teamManagementHandler = (() => {
     let teamMembers = [];
 
@@ -227,24 +191,7 @@ console.log(teamManagementHandler.getMembers());
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // ===== userAuthSessionManager.js contents =====
-
-
-
-
-
 const USER_SESSION_KEY = 'userAuthSession';
 const SESSION_EXPIRY_TIME = 3600000; // 1 hour in milliseconds
 
@@ -300,15 +247,15 @@ export { saveUserSession, getUserSession, clearUserSession, isUserAuthenticated,
 
 
 
-
-
-export { clipboardManager.js };
-export { clipboardNotificationManager.js };
-export { teamManagementHandler.js };
-export { userAuthSessionManager.js };
-
-
-
-
-
-
+  // Exports from VibeSheet modules
+export { clipboardManager };
+export { clipboardNotificationManager };
+export { teamManagementHandler };
+export { userAuthSessionManager };
+export {
+  saveUserSession,
+  getUserSession,
+  clearUserSession,
+  isUserAuthenticated,
+  updateUserSession
+};
