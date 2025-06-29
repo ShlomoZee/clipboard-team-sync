@@ -241,9 +241,6 @@ function updateUserSession(sessionData) {
   }
 }
 
-export { saveUserSession, getUserSession, clearUserSession, isUserAuthenticated, updateUserSession };
-
-
 
 
 
