@@ -1,7 +1,26 @@
 // src/options/options.js
 // Controls the Settings page: team invites, notification toggles, and shortcut
 
+import {
+  auth,
+  sendSignInLinkToEmail
+} from '../firebase.js';
+
+
 import { teamManagementHandler } from '../vibesheet_clipboard.js';
+
+
+// This URL can be any page you control that handles the email-link callback.
+// For Chrome Extensions, you can use your extension's hosted Auth handler or a
+// simple static page. We'll flesh this out next.
+const actionCodeSettings = {
+  // Use your Firebase project domain + path:
+  url: 'https://clipboard-team-sync.firebaseapp.com/__/auth/handler',
+  handleCodeInApp: true
+};
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // Load saved settings from chrome.storage
@@ -24,16 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   // Invite button handler
-  document.getElementById('inviteBtn').addEventListener('click', () => {
-    const emailInput = document.getElementById('newEmail');
-    const email = emailInput.value.trim();
-    if (email) {
-      teamManagementHandler.addMember(email);
-      savePreferences();
-      renderMembers();
-      emailInput.value = '';
-    }
-  });
+document.getElementById('inviteBtn').addEventListener('click', async () => {
+  const emailInput = document.getElementById('newEmail');
+  const email = emailInput.value.trim();
+  if (!email) return alert('Please enter an email.');
+
+  try {
+    // Send the magic link
+    await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+    alert(`Invite sent to ${email}! Check your inbox.`);
+    // Store pending email so we can complete sign-in later
+    chrome.storage.sync.set({ pendingEmail: email });
+    emailInput.value = '';
+  } catch (err) {
+    console.error('Error sending invite:', err);
+    alert('Failed to send invite. Check console for details.');
+  }
+});
+
 
   // Notification toggle handlers
   document.getElementById('teamNotif').addEventListener('change', savePreferences);

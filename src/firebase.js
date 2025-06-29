@@ -23,7 +23,6 @@ import {
   orderBy
 } from 'firebase/firestore';
 
-// TODO: Replace the below config with your Firebase project's values
 const firebaseConfig = {
  apiKey: "AIzaSyA0_Ma-nnX39FZXbIPuJksYkE3azq5ArLo",
   authDomain: "clipboard-team-sync.firebaseapp.com",

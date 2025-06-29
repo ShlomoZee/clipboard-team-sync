@@ -1,0 +1,23 @@
+{
+  "name": "clipboard-team-sync",
+  "version": "1.0.0",
+  "description": "```markdown\r # clipboard-team-sync",
+  "main": "clipboardManager.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShlomoZee/clipboard-team-sync.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShlomoZee/clipboard-team-sync/issues"
+  },
+  "homepage": "https://github.com/ShlomoZee/clipboard-team-sync#readme",
+  "dependencies": {
+    "firebase": "^11.9.1"
+  }
+}
