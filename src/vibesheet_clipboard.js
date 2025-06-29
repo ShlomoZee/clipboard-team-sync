@@ -251,7 +251,6 @@ export { saveUserSession, getUserSession, clearUserSession, isUserAuthenticated,
 export { clipboardManager };
 export { clipboardNotificationManager };
 export { teamManagementHandler };
-export { userAuthSessionManager };
 export {
   saveUserSession,
   getUserSession,
