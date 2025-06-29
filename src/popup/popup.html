@@ -1,0 +1,28 @@
+<!--
+  src/popup/popup.html
+  The toolbar popup for Clipboard Team Sync, with tabs, search bar, and clip list.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clipboard Team Sync</title>
+  <!-- Link to popup.css for styling (you can add rules later) -->
+  <link rel="stylesheet" href="popup.css" />
+  <!-- Load the popup script as an ES module -->
+  <script type="module" src="popup.js"></script>
+</head>
+<body>
+  <!-- Tab buttons to switch between views -->
+  <div id="tabs">
+    <button data-tab="all">All Clips</button>
+    <button data-tab="fav">Favorites</button>
+    <button data-tab="team">Team Clips</button>
+  </div>
+  <!-- Search input to filter clips by text -->
+  <input id="search" type="text" placeholder="Search clips…" />
+  <!-- Container where clips will be rendered -->
+  <div id="clipList"></div>
+</body>
+</html>
