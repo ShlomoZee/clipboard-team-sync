@@ -15,7 +15,7 @@ import { teamManagementHandler } from '../vibesheet_clipboard.js';
 // simple static page. We'll flesh this out next.
 const actionCodeSettings = {
   // Use your Firebase project domain + path:
-  url: 'https://clipboard-team-sync.firebaseapp.com/__/auth/handler',
+  url: 'https://clipboard-team-sync.web.app/auth.html',
   handleCodeInApp: true
 };
 

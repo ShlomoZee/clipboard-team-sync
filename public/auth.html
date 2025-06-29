@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Auth Handler</title></head>
+<body>
+  <script type="module">
+    import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from '/__/firebase/7.26.1/firebase-auth.js';
+    import { initializeApp } from '/__/firebase/7.26.1/firebase-app.js';
+
+    // Initialize using Firebase Hosting’s injected config
+    const app = initializeApp(self.__FIREBASE_CONFIG);
+    const auth = getAuth(app);
+
+    // Complete the sign-in if this is an email-link
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      const email = window.localStorage.getItem('pendingEmail');
+      signInWithEmailLink(auth, email, window.location.href)
+        .then(() => alert('Sign-in successful! You can close this tab.'))
+        .catch(console.error);
+    }
+  </script>
+</body>
+</html>
