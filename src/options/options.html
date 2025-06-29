@@ -1,0 +1,62 @@
+<!--
+  src/options/options.html
+  Settings page for Clipboard Team Sync:
+    - Invite/remove teammates
+    - Toggle notifications
+    - Customize keyboard shortcut
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clipboard Team Sync Settings</title>
+  <!-- Load the options script as an ES module -->
+  <script type="module" src="options.js"></script>
+  <style>
+    /* Basic spacing and layout; you can move to options.css later */
+    body { font-family: sans-serif; margin: 20px; }
+    section { margin-bottom: 24px; }
+    label { display: block; margin: 8px 0; }
+    input[type="email"], input[type="text"] { width: 100%; padding: 4px; }
+    button { margin-top: 4px; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <h1>Settings</h1>
+
+  <!-- Team Management -->
+  <section id="team-section">
+    <h2>Team Members</h2>
+    <!-- Invite by email -->
+    <input id="newEmail" type="email" placeholder="Enter email to invite" />
+    <button id="inviteBtn">Invite</button>
+    <!-- Current list of team members -->
+    <ul id="memberList"></ul>
+  </section>
+
+  <!-- Notification Preferences -->
+  <section id="notifications-section">
+    <h2>Notifications</h2>
+    <label>
+      <input type="checkbox" id="teamNotif" />
+      Show notifications for Team Clips
+    </label>
+    <label>
+      <input type="checkbox" id="allNotif" />
+      Show notifications for All Clips
+    </label>
+  </section>
+
+  <!-- Keyboard Shortcut -->
+  <section id="shortcut-section">
+    <h2>Keyboard Shortcut</h2>
+    <label for="shortcut">
+      Open Popup Shortcut
+      <input id="shortcut" type="text" placeholder="e.g. Ctrl+Alt+C" />
+    </label>
+  </section>
+</body>
+</html>
