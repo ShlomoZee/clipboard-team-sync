@@ -8,8 +8,15 @@ import {
 
 // Wait for the DOM to load before querying elements
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize display with all clips
-  renderClips('all');
+  // Load persisted clipboard items from chrome.storage.local
+  chrome.storage.local.get('clipboardItems', result => {
+    const items = result.clipboardItems || [];
+    // Seed our in-memory manager so renderClips has data
+    items.forEach(text => clipboardManager.saveClipboardItem(text));
+    // Now render the "All Clips" tab by default
+    renderClips('all');
+  });
+
 
   // Set up tab click handlers
   document.querySelectorAll('#tabs button').forEach(button => {
