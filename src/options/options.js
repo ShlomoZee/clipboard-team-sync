@@ -1,5 +1,11 @@
 // src/options/options.js
 // Controls the Settings page: team invites, notification toggles, and shortcut
+import {
+  db,
+  doc,
+  getDoc,
+  setDoc
+} from '../firebase.js';
 
 import {
   auth,
@@ -8,6 +14,10 @@ import {
 
 
 import { teamManagementHandler } from '../vibesheet_clipboard.js';
+
+
+
+
 
 
 // This URL can be any page you control that handles the email-link callback.
@@ -19,10 +29,25 @@ const actionCodeSettings = {
   handleCodeInApp: true
 };
 
+// Firestore reference for this team’s member list
+const teamDocRef = doc(db, 'teams', 'clipboard-team-sync');
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Load the current team list from Firestore
+getDoc(teamDocRef)
+  .then(snapshot => {
+    if (snapshot.exists()) {
+      const { members } = snapshot.data();
+      // Reset our in-memory list to what’s in Firestore
+      teamManagementHandler.clearMembers();
+      members.forEach(email => teamManagementHandler.addMember(email));
+      renderMembers();
+    }
+  })
+  .catch(err => console.error('Error loading team from Firestore:', err));
+
   // Load saved settings from chrome.storage
   chrome.storage.sync.get(
     ['teamMembers', 'teamNotif', 'allNotif', 'shortcut'],
@@ -98,4 +123,10 @@ function savePreferences() {
   chrome.storage.sync.set(prefs, () => {
     console.log('Preferences saved:', prefs);
   });
+  // Also save the updated team list to Firestore
+const members = teamManagementHandler.getMembers();
+setDoc(teamDocRef, { members }, { merge: true })
+  .then(() => console.log('Team saved to Firestore:', members))
+  .catch(err => console.error('Error saving team to Firestore:', err));
+
 }
