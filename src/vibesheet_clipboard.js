@@ -33,14 +33,20 @@ const clipboardManager = (() => {
     saveToLocalStorage(clipboardItems);
   };
 
-  const loadClipboardItems = () => {
-    const stored = JSON.parse(localStorage.getItem('clipboardItems')) || [];
-    clipboardItems.push(...stored);
-  };
+// Save to chrome.storage.local so both background and popup can read it
+const saveToLocalStorage = (items) => {
+  chrome.storage.local.set({ clipboardItems: items });
+};
 
-  const saveToLocalStorage = (items) => {
-    localStorage.setItem('clipboardItems', JSON.stringify(items));
-  };
+// Load from chrome.storage.local (async)
+const loadClipboardItems = () => {
+  chrome.storage.local.get('clipboardItems', result => {
+    const stored = result.clipboardItems || [];
+    clipboardItems.push(...stored);
+  });
+};
+
+
 
   const syncToServer = (text) => {
     // TODO: replace with real Firebase/Firestore integration
