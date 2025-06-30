@@ -148,12 +148,27 @@ const teamManagementHandler = (() => {
 
   const getMembers = () => [...teamMembers];
 
+  // ——— New methods below ———
+
+  /** Replace the entire member list with a fresh array */
+  const setMembers = (membersArray) => {
+    teamMembers = membersArray.map(normalize);
+  };
+
+  /** Clear out all members */
+  const clearMembers = () => {
+    teamMembers = [];
+  };
+
   return {
     addMember,
     removeMember,
-    getMembers
+    getMembers,
+    setMembers,
+    clearMembers
   };
 })();
+
 
 // ===== userAuthSessionManager.js contents =====
 const USER_SESSION_KEY = 'userAuthSession';
